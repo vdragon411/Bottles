@@ -550,6 +550,8 @@ class BottlesRunner:
         bottle = "%s/%s" % (self.bottles_path, configuration.get("Path"))
         results =  glob("%s/drive_c/users/*/Start Menu/Programs/**/*.lnk" % bottle,
                         recursive=True)
+        results +=  glob("%s/drive_c/users/**/Microsoft/Windows/Start Menu/Programs/**/*.lnk" % bottle,
+                        recursive=True)
         results += glob("%s/drive_c/ProgramData/Microsoft/Windows/Start Menu/Programs/**/*.lnk" % bottle,
                         recursive=True)
         installed_programs = []
