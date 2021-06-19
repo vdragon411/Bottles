@@ -731,12 +731,11 @@ class BottlesRunner:
                 self.local_bottles[bottle_name_path] = configuration_file_json
 
             except FileNotFoundError:
-                new_configuration_json = self.sample_configuration
+                new_configuration_json = self.sample_configuration.copy()
                 new_configuration_json["Broken"] = True
                 new_configuration_json["Name"] = bottle_name_path
                 new_configuration_json["Environment"] = "Undefined"
                 self.local_bottles[bottle_name_path] = new_configuration_json
-                continue
 
 
         if len(self.local_bottles) > 0 and not silent:
@@ -1177,7 +1176,7 @@ class BottlesRunner:
 
         '''If runner is proton then set path to /dist'''
         if runner.startswith("Proton"):
-            if os.path.exists("%s/dist" % runner):
+            if os.path.exists("%s/%s/dist" % (self.runners_path, runner)):
                 runner = "%s/dist" % runner
             else:
                 runner = "%s/files" % runner
